@@ -23,6 +23,14 @@
 		<property name="prefix" value="/WEB-INF/jsp/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
+	<!-- 配置SpringMVC拦截器 -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/order/**" />
+			<bean
+				class="com.huazai.b2c.aiyou.interceptor.TbLoginInterceptor"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
 
 	<!-- 添加js，css资源映射标签 -->
 	<!-- location="/WEB-INF/js/" 表示在该目录下的静态资源包括子目录下的静态资源都不会被拦截 -->
@@ -31,14 +39,13 @@
 	<mvc:resources location="/WEB-INF/css/" mapping="/css/**" />
 	<mvc:resources location="/WEB-INF/images/"
 		mapping="/images/**" />
-		
+
 	<!-- 配置远程Dubbo服务地址 -->
 	<dubbo:application name="aiyou-order-web" />
 	<dubbo:registry protocol="zookeeper"
 		address="${single.zookeeper.baseUrl}" />
 
 	<!-- 应用调用远程服务接口 -->
-<!-- 	<dubbo:reference
-		interface="com.huazai.b2c.aiyou.service.TbDubboService"
+	<!-- <dubbo:reference interface="com.huazai.b2c.aiyou.service.TbDubboService" 
 		id="tbDubboService" timeout="300000" /> -->
 </beans>
