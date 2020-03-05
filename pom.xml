@@ -3,28 +3,29 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>com.huazai.b2c.aiyou</groupId>
+		<groupId>com.huazai.aiyou.parent</groupId>
 		<artifactId>aiyou-parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
+	<groupId>com.huazai.aiyou.order</groupId>
 	<artifactId>aiyou-order-web</artifactId>
 	<packaging>war</packaging>
 	<dependencies>
 		<!-- 订单后台服务接口 -->
 		<dependency>
-			<groupId>com.huazai.b2c.aiyou</groupId>
+			<groupId>com.huazai.aiyou.order</groupId>
 			<artifactId>aiyou-order-interface</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<!-- SSO单点登录后台服务接口 -->
 		<dependency>
-			<groupId>com.huazai.b2c.aiyou</groupId>
+			<groupId>com.huazai.aiyou.sso</groupId>
 			<artifactId>aiyou-sso-interface</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<!-- 购物车后台服务接口 -->
 		<dependency>
-			<groupId>com.huazai.b2c.aiyou</groupId>
+			<groupId>com.huazai.aiyou.cart</groupId>
 			<artifactId>aiyou-cart-interface</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>

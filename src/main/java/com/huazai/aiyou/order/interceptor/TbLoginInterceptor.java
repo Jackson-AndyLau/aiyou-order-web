@@ -1,4 +1,4 @@
-package com.huazai.b2c.aiyou.interceptor;
+package com.huazai.aiyou.order.interceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.huazai.b2c.aiyou.repo.AiyouResultData;
-import com.huazai.b2c.aiyou.service.TbUserService;
-import com.huazai.b2c.aiyou.utils.CookieUtils;
+import com.huazai.aiyou.common.response.AiyouResultData;
+import com.huazai.aiyou.common.utils.CookieUtils;
+import com.huazai.aiyou.sso.service.TbUserService;
 
 /**
  * 

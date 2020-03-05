@@ -1,4 +1,4 @@
-package com.huazai.b2c.aiyou.controller;
+package com.huazai.aiyou.order.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,13 +14,13 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.huazai.b2c.aiyou.pojo.TbUser;
-import com.huazai.b2c.aiyou.repo.AiyouResultData;
-import com.huazai.b2c.aiyou.service.TbItemCartService;
-import com.huazai.b2c.aiyou.service.TbUserService;
-import com.huazai.b2c.aiyou.utils.CookieUtils;
-import com.huazai.b2c.aiyou.utils.JsonUtils;
-import com.huazai.b2c.aiyou.vo.TbItemCartVO;
+import com.huazai.aiyou.cart.service.TbItemCartService;
+import com.huazai.aiyou.common.response.AiyouResultData;
+import com.huazai.aiyou.common.utils.CookieUtils;
+import com.huazai.aiyou.common.utils.JsonUtils;
+import com.huazai.aiyou.common.vo.TbItemCartVO;
+import com.huazai.aiyou.manager.pojo.TbUser;
+import com.huazai.aiyou.sso.service.TbUserService;
 
 /**
  * 
@@ -45,18 +45,18 @@ public class TbOrderController
 	@Autowired
 	private TbItemCartService tbItemCartService;
 
-	@Value(value = "${TB_ITEM_CART_LOCAL_KEY}")
-	private String TB_ITEM_CART_LOCAL_KEY;
+	@Value(value = "${AIYOU_TB_ITEM_CART_LOCAL_KEY}")
+	private String AIYOU_TB_ITEM_CART_LOCAL_KEY;
 
-	@Value(value = "${TB_LOGIN_USER_INFO_KEY}")
-	private String TB_LOGIN_USER_INFO_KEY;
+	@Value(value = "${AIYOU_TB_USER_COOKIE_TOKEN_KEY}")
+	private String AIYOU_TB_USER_COOKIE_TOKEN_KEY;
 
 	@Description(value = "显示订单详情")
 	@RequestMapping(value = "/order-cart")
 	public String showOrderInfo(HttpServletRequest request, HttpServletResponse response)
 	{
 		// 从用户本地的Cookie中获取登录后的Token
-		String token = CookieUtils.getCookieValue(request, TB_LOGIN_USER_INFO_KEY);
+		String token = CookieUtils.getCookieValue(request, AIYOU_TB_USER_COOKIE_TOKEN_KEY);
 		TbUser tbUser = new TbUser();
 		if (!StringUtils.isEmpty(token))
 		{
@@ -108,7 +108,7 @@ public class TbOrderController
 		// 数据合并完成，清除用户本地Cookie中的购物车信息
 		if (!CollectionUtils.isEmpty(cookieTbItemCartVOs))
 		{
-			CookieUtils.deleteCookie(request, response, TB_ITEM_CART_LOCAL_KEY);
+			CookieUtils.deleteCookie(request, response, AIYOU_TB_ITEM_CART_LOCAL_KEY);
 		}
 		// 更新View购物车数据
 		request.setAttribute("cartList", redisTbItemCartVOs);
@@ -133,7 +133,7 @@ public class TbOrderController
 	private List<TbItemCartVO> getTbItemCartByCookie(HttpServletRequest request)
 	{
 		// 从Cookie中获取商品信息
-		String resultData = CookieUtils.getCookieValue(request, TB_ITEM_CART_LOCAL_KEY, true);
+		String resultData = CookieUtils.getCookieValue(request, AIYOU_TB_ITEM_CART_LOCAL_KEY, true);
 		// 将商品转换成列表并返回
 		List<TbItemCartVO> tbItemCartVOs = new ArrayList<TbItemCartVO>();
 		if (!StringUtils.isEmpty(resultData))
